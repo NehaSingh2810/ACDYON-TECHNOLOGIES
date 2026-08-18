@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, ShieldCheck, Sun, Moon, Sparkles, Activity, Github } from 'lucide-react';
+import { ShieldCheck, Sun, Moon, Terminal } from 'lucide-react';
 
 export default function Navbar({ theme, setTheme, onOpenWaitlist, onOpenTerminal, serverOnline }) {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +28,7 @@ export default function Navbar({ theme, setTheme, onOpenWaitlist, onOpenTerminal
         padding: scrolled ? '0.75rem 0' : '1.25rem 0',
         transition: 'all 0.3s ease',
         background: scrolled 
-          ? (theme === 'dark' ? 'rgba(10, 13, 20, 0.85)' : 'rgba(255, 255, 255, 0.85)')
+          ? (theme === 'dark' ? 'rgba(10, 13, 20, 0.88)' : 'rgba(255, 255, 255, 0.88)')
           : 'transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
         borderBottom: scrolled ? '1px solid var(--border-subtle)' : 'none',
@@ -50,37 +49,24 @@ export default function Navbar({ theme, setTheme, onOpenWaitlist, onOpenTerminal
         >
           <div 
             style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '10px',
+              width: '36px',
+              height: '36px',
+              borderRadius: '9px',
               background: 'linear-gradient(135deg, #00f2fe 0%, #4facfe 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#050b14',
-              boxShadow: '0 0 16px rgba(0, 242, 254, 0.4)'
+              boxShadow: '0 0 16px rgba(0, 242, 254, 0.3)'
             }}
           >
-            <ShieldCheck size={22} strokeWidth={2.5} />
+            <ShieldCheck size={20} strokeWidth={2.5} />
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '-0.02em' }}>PulseProxy</span>
-              <span 
-                style={{ 
-                  fontSize: '0.65rem', 
-                  fontWeight: 700, 
-                  background: 'rgba(0, 242, 254, 0.15)', 
-                  color: 'var(--accent-cyan)',
-                  padding: '0.15rem 0.45rem',
-                  borderRadius: '4px',
-                  border: '1px solid rgba(0, 242, 254, 0.3)'
-                }}
-              >
-                v2.4
-              </span>
+              <span style={{ fontWeight: 800, fontSize: '1.15rem', letterSpacing: '-0.02em' }}>PulseProxy</span>
             </div>
-            <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', margin: 0 }}>Web Resilience Gateway</p>
+            <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', margin: 0 }}>Web Ingestion Gateway</p>
           </div>
         </a>
 
@@ -94,16 +80,13 @@ export default function Navbar({ theme, setTheme, onOpenWaitlist, onOpenTerminal
           className="desktop-nav"
         >
           <a href="#sandbox" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
-            Interactive Sandbox
+            Sandbox
+          </a>
+          <a href="#how-it-works" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
+            How It Works
           </a>
           <a href="#architecture" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
-            Resilience Architecture
-          </a>
-          <a href="#code" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
-            SDK & Code
-          </a>
-          <a href="#comparison" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
-            Specs & Honesty
+            Architecture
           </a>
           <a href="#faq" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.92rem', fontWeight: 500, transition: 'color 0.2s' }} onMouseEnter={e => e.target.style.color = 'var(--text-primary)'} onMouseLeave={e => e.target.style.color = 'var(--text-secondary)'}>
             FAQ
@@ -113,31 +96,6 @@ export default function Navbar({ theme, setTheme, onOpenWaitlist, onOpenTerminal
         {/* Right Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           
-          {/* Server telemetry pill */}
-          <div 
-            className="badge badge-live"
-            style={{ 
-              display: 'none', 
-              fontSize: '0.75rem',
-              padding: '0.25rem 0.65rem'
-            }}
-            id="nav-telemetry-badge"
-          >
-            <div className="pulse-dot" style={{ background: serverOnline ? 'var(--accent-emerald)' : 'var(--accent-amber)' }}></div>
-            <span>{serverOnline ? 'Edge 18ms' : 'Offline'}</span>
-          </div>
-
-          {/* Easter Egg Terminal Trigger Button */}
-          <button
-            onClick={onOpenTerminal}
-            className="btn btn-secondary btn-sm"
-            title="Secret CLI Diagnostics (Press Ctrl+K or Konami Code)"
-            style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', padding: '0.45rem 0.75rem', fontSize: '0.8rem' }}
-          >
-            <Terminal size={14} color="var(--accent-cyan)" />
-            <span style={{ fontFamily: 'var(--font-mono)' }}>CLI HUD</span>
-          </button>
-
           {/* Dark/Light Switcher */}
           <button
             onClick={toggleTheme}
@@ -148,13 +106,14 @@ export default function Navbar({ theme, setTheme, onOpenWaitlist, onOpenTerminal
             {theme === 'dark' ? <Sun size={16} color="#f59e0b" /> : <Moon size={16} color="#8b5cf6" />}
           </button>
 
-          {/* CTA Button */}
-          <button 
-            onClick={onOpenWaitlist}
+          {/* Primary Action Button */}
+          <a 
+            href="#sandbox"
             className="btn btn-primary btn-sm"
+            style={{ textDecoration: 'none' }}
           >
-            Get API Key
-          </button>
+            Try Sandbox
+          </a>
         </div>
 
       </div>
@@ -163,9 +122,6 @@ export default function Navbar({ theme, setTheme, onOpenWaitlist, onOpenTerminal
         @media (min-width: 840px) {
           .desktop-nav {
             display: flex !important;
-          }
-          #nav-telemetry-badge {
-            display: inline-flex !important;
           }
         }
       `}</style>

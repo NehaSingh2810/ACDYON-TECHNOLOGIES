@@ -1,26 +1,26 @@
 # ⚡ PulseProxy — Resilient Web Ingestion Gateway
 
-**Acdyon Technologies Engineering Frontend Challenge Candidate Submission**  
-**Track Selected:** Part 2 — The Premium Home Page (`PulseProxy` / Resilient Ingestion Gateway)
+**Acdyon Technologies Engineering Frontend Challenge**  
+**Track Selected:** Part 2 — The Premium Home Page (`PulseProxy`)
 
 ---
 
 ## 🌟 Overview
 
-**PulseProxy** is a developer platform designed specifically for high-stakes web scraping and anti-bot evasion. Rather than presenting static screenshots or fake marketing hype, this project combines a **Product Hunt #1 grade home page** with an active, interactive **Live Ingestion Sandbox & Telemetry Engine**.
+**PulseProxy** is an interactive developer prototype demonstrating resilient web-ingestion strategies, fallback behavior, and pipeline observability. Rather than presenting static screenshots or fake marketing hype, this project combines a clean product interface with a working **Interactive Ingestion Sandbox**.
 
-- **Frontend (`frontend/`)**: React + Vite SPA built with custom HSL CSS tokens, zero-dependency layout mechanics, full light/dark mode support, Konami Code developer Easter Egg CLI HUD, and 390px-1440px+ zero-overflow responsiveness.
-- **Backend (`backend/`)**: Express.js REST service delivering real-time edge telemetry, JA4 TLS camouflage simulation, dynamic payload extraction, and waitlist persistence (`waitlist.json`).
+- **Frontend (`frontend/`)**: React 18 + Vite SPA built with custom HSL CSS tokens, light/dark mode support, Easter Egg CLI HUD, and zero-overflow responsiveness from 390px to 1440px+.
+- **Backend (`backend/`)**: Express.js REST service delivering pipeline simulation steps, telemetry data, and waitlist persistence (`waitlist.json`).
 
 ---
 
-## 📁 Repository Structure
+## 📁 Project Structure
 
 ```
 .
 ├── frontend/                  # React + Vite Frontend Application
 │   ├── src/
-│   │   ├── components/        # Hero, Sandbox, Architecture, CLI HUD, etc.
+│   │   ├── components/        # Hero, Sandbox, HowItWorks, Architecture, FAQ, etc.
 │   │   ├── App.jsx            # Core layout & keyboard event triggers
 │   │   ├── index.css          # CSS Variables, Design Tokens & Themes
 │   │   └── main.jsx           # Entry point
@@ -34,7 +34,6 @@
 │   └── package.json
 │
 ├── DECISIONS.md               # 1-Page Technical Rationale & Trade-offs
-├── RECRUITER_EXPLANATION_GUIDE.md # Interview defense walkthrough
 ├── vercel.json                # Vercel Deployment Configuration
 ├── render.yaml                # Render Deployment Blueprint
 └── package.json               # Monorepo root runner scripts
@@ -48,9 +47,9 @@
 - **Node.js**: v18.0.0 or higher
 - **npm**: v9.0.0 or higher
 
-### Option 1: Running Both Frontend & Backend (Recommended)
+### Running Frontend & Backend
 
-1. **Install Dependencies** (Root, Frontend, & Backend):
+1. **Install Dependencies**:
    ```bash
    npm install
    cd frontend && npm install && cd ..
@@ -67,50 +66,36 @@
    npm run frontend
    ```
 
-4. Open your browser at **`http://localhost:5173`**!
+4. Open your browser at **`http://localhost:5173`**.
 
 ---
 
 ## 🌐 Deployment Instructions
 
 ### 1. Deploying Frontend to Vercel / Netlify
-1. Connect your GitHub repository to **Vercel** or **Netlify**.
-2. Set the **Root Directory** to `frontend`.
+1. Connect repository to **Vercel** or **Netlify**.
+2. Root Directory: `frontend`
 3. Build Command: `npm run build`
 4. Output Directory: `dist`
-5. Deploy! (Included `vercel.json` ensures clean SPA routing).
 
 ### 2. Deploying Backend to Render / Railway
-1. Connect your repository to **Render** or **Railway**.
-2. Select **Web Service**.
-3. Set Root Directory to `backend`.
-4. Build Command: `npm install`
-5. Start Command: `node index.js`
-6. Set Environment Variable: `PORT=5000`.
+1. Connect repository to **Render** or **Railway**.
+2. Root Directory: `backend`
+3. Build Command: `npm install`
+4. Start Command: `node index.js`
+5. Environment Variable: `PORT=5000`
 
 ---
 
-## 🎯 Assessment Criteria Checklist
+## 📌 Important Prototype Note
 
-| Criteria | Implementation Status |
-| :--- | :--- |
-| **Hero Section & CTA** | Verified (Hero section with clear value prop, dual CTAs, telemetry status badge) |
-| **Show, Don't Claim** | Verified (Interactive Live Sandbox with real-time JSON viewer & waterfall) |
-| **Motion Restraint** | Verified (Subtle glassmorphism, ambient background glow, CSS keyframe micro-animations) |
-| **Responsiveness** | Verified (Hand-tested down to 390px mobile width with 0px horizontal scroll) |
-| **Dark / Light Mode** | Verified (Custom CSS variables with instant runtime theme toggle) |
-| **Zero Fake Hype** | Verified (No fake 5-star reviews, real technical specifications & honest matrix) |
-| **Easter Egg** | Verified (Press `Ctrl + K` or type Konami Code: `↑ ↑ ↓ ↓ ← → ← → B A`) |
-| **Clean Architecture** | Verified (`frontend/` and `backend/` decoupled folders for easy deployment) |
+The ingestion pipeline is simulated for safety and zero-downtime evaluation. No live third-party accounts or protected platforms are accessed by the demo.
 
 ---
 
-## 📜 Key Endpoints (Backend API)
+## 📄 Design Decisions
 
-- `GET /api/status`: Operational health, active edge nodes, latency metrics.
-- `POST /api/simulate`: Runs anti-bot evasion & DOM extraction pipeline simulation.
-- `POST /api/waitlist`: Validates and saves developer waitlist requests.
-- `GET /api/easter-egg`: Verification probe triggered by the CLI terminal.
+For detailed architectural trade-offs and AI usage disclosures, see [`DECISIONS.md`](file:///c:/Users/anshi/Desktop/neha%20acdyon/DECISIONS.md).
 
 ---
 

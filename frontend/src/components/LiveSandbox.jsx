@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { Play, RotateCcw, Copy, Check, ShieldCheck, AlertTriangle, Terminal, Code2, Globe, Clock, Layers, Zap, SlidersHorizontal, CheckCircle2 } from 'lucide-react';
+import { Play, RotateCcw, Copy, Check, ShieldCheck, AlertTriangle, Terminal, Code2, Globe, Clock, SlidersHorizontal, CheckCircle2 } from 'lucide-react';
 
 const PRESETS = [
   {
     id: 'job_board',
     label: 'Public Job Feed Demo',
     url: 'https://demo.sandbox.internal/jobs/public-feed.json',
-    protection: 'Cloudflare Turnstile + JA3 Fingerprint'
+    protection: 'Simulated TLS & Fingerprint Check'
   },
   {
     id: 'ecommerce',
     label: 'E-Commerce Catalog Demo',
     url: 'https://demo.sandbox.internal/catalog/products.json',
-    protection: 'Akamai Bot Manager + Canvas Trap'
+    protection: 'Simulated Canvas & Render Trap'
   },
   {
     id: 'custom',
     label: 'Client-Rendered SPA Demo',
     url: 'https://demo.sandbox.internal/spa/analytics-board',
-    protection: 'PerimeterX Behavioral Jitter'
+    protection: 'Simulated Behavioral Pacing Check'
   }
 ];
 
@@ -83,8 +83,8 @@ export default function LiveSandbox() {
         success: true,
         metrics: {
           totalDurationMs: stealthMode ? 342 : 145,
-          bypassProbability: stealthMode && tlsCamouflage ? "99.4%" : "41.2%",
-          proxyIp: "198.51.100.84",
+          strategyConfidence: "High (Simulated)",
+          simulatedProxyIp: "198.51.100.84",
           ja4Fingerprint: `t13d090100_d14_${Math.random().toString(36).substring(2, 8)}`,
           headersCaptured: {
             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
@@ -92,35 +92,33 @@ export default function LiveSandbox() {
           }
         },
         pipelineSteps: [
-          { name: "DNS Resolution & Edge Routing", durationMs: 18, status: "ok", detail: "Routed to US-East edge sandbox node" },
-          { name: "Residential Proxy Allocation", durationMs: 42, status: "ok", detail: "Assigned peer IP 198.51.100.84" },
-          { name: "TLS / JA4 Handshake Camouflage", durationMs: 65, status: tlsCamouflage ? "ok" : "warning", detail: tlsCamouflage ? "JA4 client hello matches real Chrome 122" : "Unmasked TLS cipher signature" },
-          { name: "Headless Browser Profile Emulation", durationMs: 95, status: stealthMode ? "ok" : "failed", detail: stealthMode ? "WebGL & AudioContext noise applied" : "navigator.webdriver = true exposed" },
-          { name: "DOM Extraction & Semantic AST Parser", durationMs: 60, status: "ok", detail: smartFallback ? "Selectors parsed with fallback resilience" : "Raw CSS query evaluated" }
+          { name: "01 Target Analysis", durationMs: 18, status: "ok", detail: "Analyzed request target parameters" },
+          { name: "02 Strategy Selection", durationMs: 42, status: "ok", detail: "Selected TLS profile & proxy allocation" },
+          { name: "03 Profile Hardening", durationMs: 65, status: tlsCamouflage ? "ok" : "warning", detail: tlsCamouflage ? "Simulated JA4 handshake matching" : "Standard OpenSSL signature" },
+          { name: "04 Fallback Evaluation", durationMs: 95, status: stealthMode ? "ok" : "failed", detail: stealthMode ? "Environment noise & browser mask active" : "Standard Chromium flags exposed" },
+          { name: "05 Structured Extraction", durationMs: 60, status: "ok", detail: smartFallback ? "Parsed fields with AST fallback support" : "Evaluated standard selectors" }
         ],
         scrapedPayload: {
           target: "Public Job Board Demo Feed",
-          detectedSecurityLayer: "Cloudflare Turnstile + TLS Fingerprinting",
+          extractionStatus: "SIMULATED SUCCESS",
           extractedItemsCount: 2,
           items: [
             {
-              id: "job-89104",
-              title: "Senior Full Stack Engineer (Distributed Systems)",
-              company: "Acdyon Technologies",
+              id: "item-101",
+              title: "Senior Full Stack Engineer",
+              company: "Example Labs",
               location: "Remote / Hybrid",
-              salaryRange: "$140,000 - $185,000 + Equity",
-              tags: ["React", "Node.js", "Distributed Systems"],
-              fingerprintStatus: "Bypassed via JA4 TLS Camouflage",
+              tags: ["React", "Node.js", "APIs"],
+              fallbackUsed: false,
               domConfidenceScore: 0.99
             },
             {
-              id: "job-89105",
+              id: "item-102",
               title: "Systems Infrastructure Lead",
-              company: "Apex Data Labs",
+              company: "Sample Technologies",
               location: "San Francisco, CA",
-              salaryRange: "$165,000 - $210,000",
-              tags: ["Rust", "Proxies", "Puppeteer/Playwright"],
-              fingerprintStatus: "Bypassed via Chrome 122 Header Profile",
+              tags: ["Rust", "Networking", "Browser Automation"],
+              fallbackUsed: true,
               domConfidenceScore: 0.98
             }
           ]
@@ -147,13 +145,13 @@ export default function LiveSandbox() {
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <div className="badge badge-cyan" style={{ marginBottom: '0.75rem' }}>
             <SlidersHorizontal size={14} />
-            <span>LIVE PRODUCT PREVIEW</span>
+            <span>INTERACTIVE SIMULATION</span>
           </div>
           <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.25rem)', marginBottom: '0.75rem' }}>
             Explore the pipeline yourself — no signup required
           </h2>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '640px', margin: '0 auto', fontSize: '1rem' }}>
-            Test our resilient ingestion pipeline against simulated anti-bot conditions. Toggle strategy layers and observe step-by-step telemetry in real-time.
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '640px', margin: '0 auto', fontSize: '0.98rem' }}>
+            Simulated pipeline environment — no third-party accounts or live traffic required.
           </p>
         </div>
 
@@ -198,7 +196,7 @@ export default function LiveSandbox() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Target Security:</span>
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Target Check:</span>
               <span className="badge" style={{ fontSize: '0.75rem', background: 'rgba(139, 92, 246, 0.1)', color: 'var(--accent-violet)', borderColor: 'rgba(139, 92, 246, 0.3)' }}>
                 {PRESETS.find(p => p.id === selectedPreset)?.protection}
               </span>
@@ -275,8 +273,8 @@ export default function LiveSandbox() {
               {/* Toggle 1 */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
                 <div>
-                  <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>JA4 TLS Camouflage</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Spoof cipher suites & extension order</div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>TLS Camouflage</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Simulate cipher suite matching</div>
                 </div>
                 <label className="toggle-switch">
                   <input type="checkbox" checked={tlsCamouflage} onChange={e => setTlsCamouflage(e.target.checked)} />
@@ -287,8 +285,8 @@ export default function LiveSandbox() {
               {/* Toggle 2 */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
                 <div>
-                  <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>Stealth Headless Mask</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>WebGL/Canvas GPU noise injection</div>
+                  <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>Stealth Browser Mask</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Simulate browser environment noise</div>
                 </div>
                 <label className="toggle-switch">
                   <input type="checkbox" checked={stealthMode} onChange={e => setStealthMode(e.target.checked)} />
@@ -300,7 +298,7 @@ export default function LiveSandbox() {
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
                 <div>
                   <div style={{ fontSize: '0.85rem', fontWeight: 600 }}>Semantic AST Fallback</div>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Resilient heuristic parser on markup drift</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Heuristic fallback on markup drift</div>
                 </div>
                 <label className="toggle-switch">
                   <input type="checkbox" checked={smartFallback} onChange={e => setSmartFallback(e.target.checked)} />
@@ -319,7 +317,7 @@ export default function LiveSandbox() {
                   {loading ? 'Pipeline in flight...' : 'Execution completed'}
                 </span>
                 <span style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)' }}>
-                  {result ? `${result.metrics.totalDurationMs}ms total` : 'Processing...'}
+                  {result ? `${result.metrics.totalDurationMs}ms simulated latency` : 'Processing...'}
                 </span>
               </div>
 
@@ -374,7 +372,7 @@ export default function LiveSandbox() {
                   }}
                 >
                   <Code2 size={14} />
-                  <span>Extracted JSON Payload</span>
+                  <span>Structured JSON Result</span>
                 </button>
 
                 <button
@@ -394,7 +392,7 @@ export default function LiveSandbox() {
                   }}
                 >
                   <ShieldCheck size={14} />
-                  <span>Evasion & JA4 Telemetry</span>
+                  <span>Pipeline Telemetry</span>
                 </button>
 
                 <button
@@ -414,7 +412,7 @@ export default function LiveSandbox() {
                   }}
                 >
                   <Clock size={14} />
-                  <span>Pipeline Waterfall</span>
+                  <span>Execution Waterfall</span>
                 </button>
               </div>
 
@@ -436,14 +434,14 @@ export default function LiveSandbox() {
                 <div style={{ textAlign: 'center', padding: '3.5rem 1rem', color: 'var(--text-muted)' }}>
                   <Terminal size={36} style={{ margin: '0 auto 1rem auto', opacity: 0.4 }} />
                   <p style={{ fontSize: '0.95rem', marginBottom: '0.5rem' }}>Pipeline idle. Click <strong>"Run Pipeline"</strong> above to launch the simulation.</p>
-                  <p style={{ fontSize: '0.8rem' }}>Interactive Demo — Runs against simulated edge endpoints for low-risk evaluation.</p>
+                  <p style={{ fontSize: '0.8rem' }}>Simulated pipeline environment — no third-party accounts or traffic required.</p>
                 </div>
               )}
 
               {loading && !result && (
                 <div style={{ textAlign: 'center', padding: '3.5rem 1rem', color: 'var(--accent-cyan)' }}>
                   <RotateCcw size={32} className="spin-animation" style={{ margin: '0 auto 1rem auto' }} />
-                  <p style={{ fontSize: '0.95rem', fontFamily: 'var(--font-mono)' }}>Bypassing anti-bot perimeter & negotiating TLS cipher suite...</p>
+                  <p style={{ fontSize: '0.95rem', fontFamily: 'var(--font-mono)' }}>Executing pipeline simulation steps...</p>
                 </div>
               )}
 
@@ -465,32 +463,32 @@ export default function LiveSandbox() {
               {result && activeTab === 'telemetry' && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
                   <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Bypass Confidence</div>
-                    <div style={{ fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent-emerald)', marginTop: '0.25rem' }}>
-                      {result.metrics.bypassProbability}
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Demo Strategy Confidence</div>
+                    <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-emerald)', marginTop: '0.25rem' }}>
+                      High (Simulated)
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                      {stealthMode && tlsCamouflage ? 'Zero CAPTCHAs triggered' : 'High detection probability'}
+                      All fallback guardrails active
                     </div>
                   </div>
 
                   <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Generated JA4 TLS Fingerprint</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Simulated JA4 TLS Hash</div>
                     <div style={{ fontSize: '0.92rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', marginTop: '0.35rem', wordBreak: 'break-all' }}>
                       {result.metrics.ja4Fingerprint}
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                      Cipher suite spoofing Chrome 122
+                      Cipher suite spoofing Chrome profile
                     </div>
                   </div>
 
                   <div style={{ background: 'rgba(255, 255, 255, 0.03)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255, 255, 255, 0.06)' }}>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Allocated Residential Proxy</div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Simulated Proxy Address</div>
                     <div style={{ fontSize: '1.1rem', fontFamily: 'var(--font-mono)', color: '#f8fafc', marginTop: '0.25rem' }}>
                       {result.metrics.proxyIp}
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                      Autonomous IP rotation on rate-limit trigger
+                      Isolated sandbox peer allocation
                     </div>
                   </div>
                 </div>

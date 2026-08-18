@@ -1,23 +1,23 @@
 import React from 'react';
-import { ArrowRight, Play, Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Play, ShieldCheck } from 'lucide-react';
 
-export default function Hero({ onOpenWaitlist }) {
+export default function Hero() {
   return (
     <section 
       style={{
         paddingTop: '8.5rem',
-        paddingBottom: '4rem',
+        paddingBottom: '3.5rem',
         position: 'relative',
         textAlign: 'center'
       }}
     >
       <div className="app-container">
         
-        {/* Top Product Pill */}
+        {/* Top Product Badge */}
         <div style={{ display: 'inline-flex', marginBottom: '1.75rem' }}>
           <div className="badge badge-cyan" style={{ gap: '0.6rem', padding: '0.45rem 1.1rem' }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', color: 'var(--accent-cyan)', fontWeight: 700 }}>
-              <ShieldCheck size={14} /> ACDYON TRACK 2 DEMO
+              <ShieldCheck size={14} /> PRODUCT PREVIEW
             </span>
             <span style={{ color: 'var(--text-primary)' }}>Resilient Web Ingestion Gateway</span>
             <ArrowRight size={13} color="var(--accent-cyan)" />
@@ -40,7 +40,7 @@ export default function Hero({ onOpenWaitlist }) {
             lineHeight: 1.6
           }}
         >
-          PulseProxy helps developers test, monitor, and design resilient web-ingestion workflows with intelligent fallback strategies and an interactive pipeline sandbox.
+          Explore a working prototype for resilient ingestion workflows, fallback strategies, and pipeline observability — without needing an account.
         </p>
 
         {/* Main CTAs */}
@@ -51,7 +51,7 @@ export default function Hero({ onOpenWaitlist }) {
             justifyContent: 'center', 
             gap: '1rem', 
             flexWrap: 'wrap',
-            marginBottom: '2rem'
+            marginBottom: '1rem'
           }}
         >
           <a 

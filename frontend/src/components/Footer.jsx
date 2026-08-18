@@ -1,13 +1,13 @@
 import React from 'react';
-import { ShieldCheck, Terminal, Heart, ArrowUpRight, Github } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
-export default function Footer({ onOpenTerminal, onOpenWaitlist }) {
+export default function Footer() {
   return (
     <footer 
       style={{
         background: 'var(--bg-primary)',
         borderTop: '1px solid var(--border-subtle)',
-        padding: '4.5rem 0 2.5rem 0',
+        padding: '3.5rem 0 2rem 0',
         position: 'relative'
       }}
     >
@@ -15,15 +15,17 @@ export default function Footer({ onOpenTerminal, onOpenWaitlist }) {
         
         <div 
           style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
-            gap: '2.5rem',
-            marginBottom: '3.5rem'
+            display: 'flex', 
+            flexWrap: 'wrap',
+            alignItems: 'center', 
+            justifyContent: 'space-between',
+            gap: '2rem',
+            marginBottom: '2.5rem'
           }}
         >
-          {/* Col 1: Brand & Assessment note */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
+          {/* Brand */}
+          <div style={{ maxWidth: '380px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
               <div 
                 style={{ 
                   width: '32px', 
@@ -41,65 +43,18 @@ export default function Footer({ onOpenTerminal, onOpenWaitlist }) {
               <span style={{ fontWeight: 800, fontSize: '1.15rem' }}>PulseProxy</span>
             </div>
             
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '1rem' }}>
-              High-resilience edge ingestion gateway for dynamic web platforms. Built for the Acdyon Technologies Engineering Frontend Challenge (Track 2: The Premium Home Page).
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
+              Resilient web-ingestion workflows, demonstrated through an interactive prototype.
             </p>
-
-            <div className="badge badge-cyan" style={{ fontSize: '0.75rem' }}>
-              <span>Zero Fake Testimonials Policy</span>
-            </div>
           </div>
 
-          {/* Col 2: Navigation */}
-          <div>
-            <h4 style={{ fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '1.2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Product Navigation
-            </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              <a href="#sandbox" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Interactive Sandbox</a>
-              <a href="#architecture" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Resilience Pipeline</a>
-              <a href="#code" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>SDK & Code Integration</a>
-              <a href="#comparison" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Honest Technical Specs</a>
-              <a href="#faq" style={{ color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem' }}>Technical FAQ</a>
-            </div>
-          </div>
-
-          {/* Col 3: Challenge Deliverables */}
-          <div>
-            <h4 style={{ fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '1.2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Assessment Criteria
-            </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.88rem', color: 'var(--text-secondary)' }}>
-              <div>✓ 3-Second First Impression</div>
-              <div>✓ Show, Don't Claim (Live Demo)</div>
-              <div>✓ Motion & Micro-interaction Restraint</div>
-              <div>✓ 390px to 1440px Zero-Scroll Mobile/Desktop</div>
-              <div>✓ Complete Dark & Light Theme</div>
-              <div>✓ Bonus Easter Egg Included</div>
-            </div>
-          </div>
-
-          {/* Col 4: Secret Console & Trigger */}
-          <div>
-            <h4 style={{ fontSize: '0.9rem', color: 'var(--text-primary)', marginBottom: '1.2rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Recruiter Bonus HUD
-            </h4>
-            <p style={{ fontSize: '0.84rem', color: 'var(--text-muted)', marginBottom: '1rem', lineHeight: 1.5 }}>
-              Try entering the secret Konami code on your keyboard:
-              <br />
-              <code style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent-cyan)', fontSize: '0.8rem' }}>
-                ↑ ↑ ↓ ↓ ← → ← → B A
-              </code>
-            </p>
-
-            <button
-              onClick={onOpenTerminal}
-              className="btn btn-secondary btn-sm"
-              style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', width: '100%', justifyContent: 'center' }}
-            >
-              <Terminal size={14} color="var(--accent-cyan)" />
-              <span>Launch Recruiter CLI</span>
-            </button>
+          {/* Navigation Links */}
+          <div style={{ display: 'flex', gap: '1.75rem', flexWrap: 'wrap', fontSize: '0.9rem' }}>
+            <a href="#sandbox" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Sandbox</a>
+            <a href="#how-it-works" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>How It Works</a>
+            <a href="#architecture" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>Architecture</a>
+            <a href="#faq" style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}>FAQ</a>
+            <a href="https://github.com/NehaSingh2810/ACDYON-TECHNOLOGIES" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-cyan)', textDecoration: 'none', fontWeight: 600 }}>GitHub Repo</a>
           </div>
 
         </div>
@@ -119,17 +74,11 @@ export default function Footer({ onOpenTerminal, onOpenWaitlist }) {
           }}
         >
           <div>
-            © 2026 PulseProxy / Acdyon Assessment. "Build It Like You Mean It."
+            © 2026 PulseProxy Prototype.
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-            <span>MERN Stack (React + Node/Express)</span>
-            <button 
-              onClick={onOpenWaitlist} 
-              style={{ background: 'none', border: 'none', color: 'var(--accent-cyan)', cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600 }}
-            >
-              Request Access →
-            </button>
+          <div>
+            Built as an Acdyon Technologies Frontend Challenge submission — Track 2.
           </div>
         </div>
 
