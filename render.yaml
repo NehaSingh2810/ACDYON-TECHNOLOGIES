@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: pulseproxy-backend
+    env: node
+    region: oregon
+    buildCommand: npm install
+    startCommand: node index.js
+    rootDir: backend
+    envVars:
+      - key: PORT
+        value: 5000
