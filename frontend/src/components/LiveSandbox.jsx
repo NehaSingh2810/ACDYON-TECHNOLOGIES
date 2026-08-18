@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { Play, RotateCcw, Copy, Check, ShieldCheck, AlertTriangle, Terminal, Code2, Globe, Clock, Layers, Zap, SlidersHorizontal } from 'lucide-react';
+import { Play, RotateCcw, Copy, Check, ShieldCheck, AlertTriangle, Terminal, Code2, Globe, Clock, Layers, Zap, SlidersHorizontal, CheckCircle2 } from 'lucide-react';
 
 const PRESETS = [
   {
     id: 'job_board',
-    label: 'Job Board (LinkedIn / Wellfound)',
-    url: 'https://linkedin.com/jobs/search?keywords=distributed-systems',
+    label: 'Public Job Feed Demo',
+    url: 'https://demo.sandbox.internal/jobs/public-feed.json',
     protection: 'Cloudflare Turnstile + JA3 Fingerprint'
   },
   {
     id: 'ecommerce',
-    label: 'E-Commerce (Amazon Catalog)',
-    url: 'https://amazon.com/dp/B08N5WRWNW?ref=developer_hw',
+    label: 'E-Commerce Catalog Demo',
+    url: 'https://demo.sandbox.internal/catalog/products.json',
     protection: 'Akamai Bot Manager + Canvas Trap'
   },
   {
     id: 'custom',
-    label: 'Client-Rendered SPA (React/Next)',
-    url: 'https://app.targetplatform.internal/dashboard/analytics',
+    label: 'Client-Rendered SPA Demo',
+    url: 'https://demo.sandbox.internal/spa/analytics-board',
     protection: 'PerimeterX Behavioral Jitter'
   }
 ];
@@ -92,14 +92,14 @@ export default function LiveSandbox() {
           }
         },
         pipelineSteps: [
-          { name: "DNS Resolution & Edge Routing", durationMs: 18, status: "ok", detail: "Routed to nearest US-East node" },
-          { name: "Residential Proxy Allocation", durationMs: 42, status: "ok", detail: "Assigned residential peer IP 198.51.100.84" },
+          { name: "DNS Resolution & Edge Routing", durationMs: 18, status: "ok", detail: "Routed to US-East edge sandbox node" },
+          { name: "Residential Proxy Allocation", durationMs: 42, status: "ok", detail: "Assigned peer IP 198.51.100.84" },
           { name: "TLS / JA4 Handshake Camouflage", durationMs: 65, status: tlsCamouflage ? "ok" : "warning", detail: tlsCamouflage ? "JA4 client hello matches real Chrome 122" : "Unmasked TLS cipher signature" },
           { name: "Headless Browser Profile Emulation", durationMs: 95, status: stealthMode ? "ok" : "failed", detail: stealthMode ? "WebGL & AudioContext noise applied" : "navigator.webdriver = true exposed" },
           { name: "DOM Extraction & Semantic AST Parser", durationMs: 60, status: "ok", detail: smartFallback ? "Selectors parsed with fallback resilience" : "Raw CSS query evaluated" }
         ],
         scrapedPayload: {
-          target: "LinkedIn / Wellfound Job Board",
+          target: "Public Job Board Demo Feed",
           detectedSecurityLayer: "Cloudflare Turnstile + TLS Fingerprinting",
           extractedItemsCount: 2,
           items: [
@@ -140,18 +140,20 @@ export default function LiveSandbox() {
   };
 
   return (
-    <section id="sandbox" style={{ padding: '5rem 0', position: 'relative' }}>
+    <section id="sandbox" style={{ padding: '3rem 0 5rem 0', position: 'relative' }}>
       <div className="app-container">
         
-        {/* Header */}
-        <div className="section-header">
-          <div className="badge badge-cyan">
+        {/* Header Badge */}
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <div className="badge badge-cyan" style={{ marginBottom: '0.75rem' }}>
             <SlidersHorizontal size={14} />
-            <span>Interactive Product Demonstration</span>
+            <span>LIVE PRODUCT PREVIEW</span>
           </div>
-          <h2>Show, Don't Just Claim.</h2>
-          <p>
-            Test our live ingestion pipeline against high-security anti-bot surfaces. Toggle resilience layers and inspect real extracted JSON and packet telemetry in real time.
+          <h2 style={{ fontSize: 'clamp(1.75rem, 3vw, 2.25rem)', marginBottom: '0.75rem' }}>
+            Explore the pipeline yourself — no signup required
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', maxWidth: '640px', margin: '0 auto', fontSize: '1rem' }}>
+            Test our resilient ingestion pipeline against simulated anti-bot conditions. Toggle strategy layers and observe step-by-step telemetry in real-time.
           </p>
         </div>
 
@@ -180,8 +182,8 @@ export default function LiveSandbox() {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                Preset Targets:
+              <span style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Demo Targets:
               </span>
               {PRESETS.map(p => (
                 <button
@@ -196,7 +198,7 @@ export default function LiveSandbox() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Anti-bot profile:</span>
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Target Security:</span>
               <span className="badge" style={{ fontSize: '0.75rem', background: 'rgba(139, 92, 246, 0.1)', color: 'var(--accent-violet)', borderColor: 'rgba(139, 92, 246, 0.3)' }}>
                 {PRESETS.find(p => p.id === selectedPreset)?.protection}
               </span>
@@ -252,7 +254,7 @@ export default function LiveSandbox() {
                 ) : (
                   <>
                     <Play size={16} fill="#050b14" />
-                    <span>Run Ingestion</span>
+                    <span>Run Pipeline</span>
                   </>
                 )}
               </button>
@@ -349,7 +351,9 @@ export default function LiveSandbox() {
                 justifyContent: 'space-between', 
                 padding: '0.75rem 1.25rem',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                background: 'rgba(10, 14, 22, 0.95)'
+                background: 'rgba(10, 14, 22, 0.95)',
+                flexWrap: 'wrap',
+                gap: '0.5rem'
               }}
             >
               <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -431,8 +435,8 @@ export default function LiveSandbox() {
               {!result && !loading && (
                 <div style={{ textAlign: 'center', padding: '3.5rem 1rem', color: 'var(--text-muted)' }}>
                   <Terminal size={36} style={{ margin: '0 auto 1rem auto', opacity: 0.4 }} />
-                  <p style={{ fontSize: '0.95rem', marginBottom: '0.5rem' }}>Pipeline idle. Click <strong>"Run Ingestion"</strong> above to launch the simulation.</p>
-                  <p style={{ fontSize: '0.8rem' }}>Runs through residential IP proxy, JA4 TLS camouflage, and AST DOM parser.</p>
+                  <p style={{ fontSize: '0.95rem', marginBottom: '0.5rem' }}>Pipeline idle. Click <strong>"Run Pipeline"</strong> above to launch the simulation.</p>
+                  <p style={{ fontSize: '0.8rem' }}>Interactive Demo — Runs against simulated edge endpoints for low-risk evaluation.</p>
                 </div>
               )}
 
@@ -476,7 +480,7 @@ export default function LiveSandbox() {
                       {result.metrics.ja4Fingerprint}
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                      Exact cipher matching Chrome 122 on macOS
+                      Cipher suite spoofing Chrome 122
                     </div>
                   </div>
 
@@ -486,7 +490,7 @@ export default function LiveSandbox() {
                       {result.metrics.proxyIp}
                     </div>
                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                      Autonomous rotation on 429/403 trigger
+                      Autonomous IP rotation on rate-limit trigger
                     </div>
                   </div>
                 </div>

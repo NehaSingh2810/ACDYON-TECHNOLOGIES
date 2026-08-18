@@ -1,7 +1,7 @@
 # ⚡ PulseProxy — Resilient Web Ingestion Gateway
 
 **Acdyon Technologies Engineering Frontend Challenge Candidate Submission**  
-**Track Selected:** Part 2 (The Premium Home Page) + Part 1 (Resilient Ingestion Engine Integration)
+**Track Selected:** Part 2 — The Premium Home Page (`PulseProxy` / Resilient Ingestion Gateway)
 
 ---
 

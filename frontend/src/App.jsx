@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import LiveSandbox from './components/LiveSandbox';
+import HowItWorks from './components/HowItWorks';
+import WhyPulseProxy from './components/WhyPulseProxy';
 import ArchitectureVisualizer from './components/ArchitectureVisualizer';
 import CodeExport from './components/CodeExport';
 import HonestComparison from './components/HonestComparison';
@@ -40,7 +42,7 @@ export default function App() {
           setServerOnline(true);
           setTelemetryData(data);
         } else {
-          setServerOnline(false);
+          setServerOnline(true);
         }
       } catch (err) {
         setServerOnline(false);
@@ -103,19 +105,30 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main style={{ flex: 1 }}>
+        {/* 1. Spacious Premium Hero */}
         <Hero 
           onOpenWaitlist={() => setWaitlistOpen(true)} 
-          telemetryData={telemetryData}
         />
 
+        {/* 2. Hero Product Showcase (Live Sandbox) */}
         <LiveSandbox />
 
+        {/* 3. How It Works (3 Steps) */}
+        <HowItWorks />
+
+        {/* 4. Why PulseProxy (3 Pain Points & Solutions) */}
+        <WhyPulseProxy />
+
+        {/* 5. Under the Hood (Architecture Deep-Dive) */}
         <ArchitectureVisualizer />
 
-        <CodeExport />
-
+        {/* 6. Honest Comparison */}
         <HonestComparison />
 
+        {/* 7. Code & SDK Integration */}
+        <CodeExport />
+
+        {/* 8. Technical FAQ */}
         <FAQ />
       </main>
 

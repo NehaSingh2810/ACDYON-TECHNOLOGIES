@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle, ShieldAlert } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 
 const FAQS = [
   {
-    q: 'How does JA4 TLS camouflage differ from standard proxy rotation?',
-    a: 'Standard proxy rotators only change the source IP address. However, modern bot detection (Cloudflare, Akamai, PerimeterX) inspects the initial TLS Client Hello packet. Standard Node.js / Python HTTP clients send distinct cipher suite orders and extensions (JA3/JA4 fingerprints) that scream "bot" before headers are even read. PulseProxy terminates TLS at our edge nodes and reconstructs exact browser-identical handshakes.'
+    q: 'Is this interactive sandbox running live third-party requests?',
+    a: 'The interactive demo uses deterministic simulated edge telemetry rather than live residential proxy tunneling on third-party sites. This keeps evaluation instantaneous (<350ms), resilient to zero-downtime recruitment reviews, and eliminates rate-limit lockouts.'
   },
   {
-    q: 'What happens when target platforms change their HTML markup overnight?',
-    a: 'Traditional scrapers crash with null pointer errors on broken CSS selectors (`.job-title-v2`). PulseProxy features a semantic AST (Abstract Syntax Tree) fallback engine. If a target selector fails, the engine analyzes element hierarchy, semantic proximity, and microdata/JSON-LD schemas to locate the target fields with 99.6% field extraction resilience.'
+    q: 'What core problem does PulseProxy address?',
+    a: 'PulseProxy protects data ingestion pipelines from three primary failure vectors: packet-level TLS fingerprinting (JA4), headless browser environment traps (WebGL/Canvas), and DOM markup drift when target platforms change selectors overnight.'
   },
   {
-    q: 'How does PulseProxy handle rate-limiting and HTTP 429s?',
-    a: 'Rather than firing bursts of requests, PulseProxy shapes traffic using Poisson probability distributions and stochastic micro-delays (300ms–1400ms). If a domain returns HTTP 429 or 403, our circuit breaker instantly isolates the affected IP subnet, triggers exponential backoff, and transparently routes the request through a fresh residential peer.'
+    q: 'What technology stack was chosen for this challenge?',
+    a: 'Built with React 18 and Vite on the frontend, using a custom Vanilla CSS token system with full Light/Dark mode support. The backend runs Express.js with telemetry simulation and waitlist endpoints.'
   },
   {
-    q: 'Where is your personal and technical line regarding terms of service (ToS)?',
-    a: 'PulseProxy is strictly intended for publicly accessible, unauthenticated web data. We do not support breaking through user login paywalls, accessing private user databases, or executing malicious volumetric scraping. We enforce per-domain concurrency limits to ensure target servers are never subjected to undue load.'
+    q: 'How do I test the resilience features myself?',
+    a: 'You can test all resilience layers directly in the Live Product Sandbox near the top of this page. Toggle JA4 TLS Camouflage, Stealth Headless, and Semantic AST Fallback in real-time to observe the step-by-step telemetry waterfall.'
   }
 ];
 
@@ -30,11 +30,11 @@ export default function FAQ() {
         <div className="section-header">
           <div className="badge badge-cyan">
             <HelpCircle size={14} />
-            <span>Technical FAQ</span>
+            <span>TECHNICAL FAQ</span>
           </div>
           <h2>Frequently Asked Questions</h2>
           <p>
-            Real technical answers to the hard questions about web scraping resilience and architecture.
+            Clear, honest technical answers regarding the challenge submission and architecture.
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export default function FAQ() {
                     border: 'none',
                     textAlign: 'left',
                     color: 'var(--text-primary)',
-                    fontSize: '1.05rem',
+                    fontSize: '1.02rem',
                     fontWeight: 600,
                     display: 'flex',
                     alignItems: 'center',
@@ -86,7 +86,7 @@ export default function FAQ() {
                     style={{ 
                       padding: '0 1.5rem 1.5rem 1.5rem', 
                       color: 'var(--text-secondary)',
-                      fontSize: '0.95rem',
+                      fontSize: '0.92rem',
                       lineHeight: 1.7,
                       borderTop: '1px solid var(--border-subtle)',
                       paddingTop: '1rem'
