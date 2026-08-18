@@ -28,16 +28,15 @@ if (!fs.existsSync(waitlistFile)) {
 app.get('/api/status', (req, res) => {
   res.json({
     status: 'operational',
-    version: '2.4.0-edge',
+    version: '2.4.0-edge-demo',
     timestamp: new Date().toISOString(),
+    simulationNote: 'Deterministic telemetry for candidate evaluation',
     nodes: [
-      { id: 'iad-1', region: 'US East (N. Virginia)', latencyMs: 18, health: 99.98, poolSize: 14200 },
-      { id: 'sfo-1', region: 'US West (Oregon)', latencyMs: 24, health: 99.95, poolSize: 11800 },
-      { id: 'fra-1', region: 'EU Central (Frankfurt)', latencyMs: 32, health: 100.0, poolSize: 9400 },
-      { id: 'sin-1', region: 'AP Southeast (Singapore)', latencyMs: 45, health: 99.91, poolSize: 7500 }
+      { id: 'iad-1', region: 'US East Edge Node', latencyMs: 18, health: 99.98, poolSize: 14200 },
+      { id: 'sfo-1', region: 'US West Edge Node', latencyMs: 24, health: 99.95, poolSize: 11800 },
+      { id: 'fra-1', region: 'EU Central Edge Node', latencyMs: 32, health: 100.0, poolSize: 9400 },
+      { id: 'sin-1', region: 'AP Southeast Edge Node', latencyMs: 45, health: 99.91, poolSize: 7500 }
     ],
-    totalRotationsToday: 1849200,
-    averageBypassRate: '98.4%',
     medianLatencyMs: 142
   });
 });
@@ -45,7 +44,7 @@ app.get('/api/status', (req, res) => {
 // Mock structured dataset generator for realistic scraper simulations
 const mockDataTemplates = {
   job_board: {
-    target: "LinkedIn / Wellfound Job Board",
+    target: "Public Job Board Demo Feed",
     detectedAntiBot: "Cloudflare Turnstile + TLS Fingerprinting (JA3)",
     data: [
       {
@@ -73,7 +72,7 @@ const mockDataTemplates = {
     ]
   },
   ecommerce: {
-    target: "Amazon / Shopify Dynamic Catalog",
+    target: "E-Commerce Catalog Demo",
     detectedAntiBot: "Akamai Bot Manager + Canvas Fingerprint Trap",
     data: [
       {
@@ -82,7 +81,7 @@ const mockDataTemplates = {
         inStock: true,
         priceUSD: 149.00,
         currency: "USD",
-        seller: "Direct Prime Ingestion",
+        seller: "Direct Ingestion Feed",
         inventoryRemaining: 24,
         domConfidenceScore: 0.97
       },
@@ -99,7 +98,7 @@ const mockDataTemplates = {
     ]
   },
   custom: {
-    target: "Custom Dynamic SPA (Client-rendered DOM)",
+    target: "Client-Rendered SPA Demo",
     detectedAntiBot: "PerimeterX / DataDome Behavioral Jitter Test",
     data: [
       {
@@ -107,7 +106,7 @@ const mockDataTemplates = {
         status: "Clean Extraction",
         extractedFields: {
           headline: "High-Frequency Web Data Pipeline",
-          throughput: "250,000 req/min",
+          throughput: "Simulated 250,000 req/min capability",
           antiBotBypass: "Zero CAPTCHAs Triggered",
           astParserFallback: "Triggered (3 elements relocated via semantic tree)"
         },
@@ -120,7 +119,7 @@ const mockDataTemplates = {
 // 2. Live Ingestion Simulation Endpoint
 app.post('/api/simulate', async (req, res) => {
   const { 
-    url = "https://linkedin.com/jobs/search?keywords=frontend", 
+    url = "https://demo.sandbox.internal/jobs/public-feed.json", 
     targetType = "job_board", 
     stealthMode = true,
     tlsCamouflage = true,
@@ -140,8 +139,8 @@ app.post('/api/simulate', async (req, res) => {
 
   // Pipeline Execution Steps
   const pipelineSteps = [
-    { name: "DNS Resolution & Edge Routing", durationMs: 18, status: "ok", detail: `Routed to node iad-1 via Anycast` },
-    { name: "Residential Proxy Allocation", durationMs: 42, status: "ok", detail: `Assigned residential peer IP: ${proxyIp}` },
+    { name: "DNS Resolution & Edge Routing", durationMs: 18, status: "ok", detail: `Routed to US-East edge sandbox node` },
+    { name: "Residential Proxy Allocation", durationMs: 42, status: "ok", detail: `Assigned simulated peer IP: ${proxyIp}` },
     { name: "TLS / JA4 Handshake Camouflage", durationMs: 65, status: tlsCamouflage ? "ok" : "warning", detail: tlsCamouflage ? `Generated clean JA4 fingerprint: ${ja4Hash}` : `Default OpenSSL signature (High detection risk)` },
     { name: "Headless Browser Profile Emulation", durationMs: 95, status: stealthMode ? "ok" : "failed", detail: stealthMode ? `WebGL / Canvas / AudioContext noise injected` : `Standard Chromium flags exposed (navigator.webdriver=true)` },
     { name: "DOM Extraction & Semantic AST Parser", durationMs: 60, status: "ok", detail: smartFallback ? `Dynamic selectors parsed + fallback heuristics applied` : `Strict CSS query executed` }
